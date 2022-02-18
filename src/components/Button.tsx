@@ -1,22 +1,14 @@
-import { useState } from "react";
+import { ButtonHTMLAttributes } from 'react'; // Declara todos os atributos que um botão pode receber
 
-type ButtonProps = {
-    text?: string,
-};
-
+import '../styles/button.scss';
+// Para evitar ficar colocando cada tipo de parâmetro do button no typeScript,
+// basta passar o ButtonHTMLAttributes
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement>
 
 export function Button (props: ButtonProps) {
-    const [counter, setCounter] = useState(0);
-
-    function increment() {
-        setCounter(counter + 1);
-        //console.log(counter);
-    }
-
     return (
-        <button onClick={increment}>
-            {counter}
+        <button className="button" {...props}>
+    
         </button>
     );
-
 };

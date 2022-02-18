@@ -5,6 +5,8 @@ import App from './App';
 // Inicia a conexão da nossa aplicação com o firebase
 import './services/firebase';
 
+import './styles/global.scss';
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
