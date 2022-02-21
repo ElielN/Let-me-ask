@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth" // New import
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth" // New import
 import { getDatabase } from "firebase/database";
 
 //import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
@@ -16,7 +16,9 @@ const firebaseConfig = {
     appId: process.env.REACT_APP_APP_ID
 };
 
-const app = initializeApp(firebaseConfig);
+const firebase = initializeApp(firebaseConfig);
 
-export const auth = getAuth(app);
-export const database = getDatabase(app);
+const auth = getAuth(firebase);
+const database = getDatabase(firebase);
+
+export { auth, database, GoogleAuthProvider, signInWithPopup }
