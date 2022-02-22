@@ -5,6 +5,8 @@ import googleIconImg from '../assets/images/google-icon.svg';
 import '../styles/auth.scss';
 import { Button } from '../components/Button';
 import { useAuth } from '../hooks/useAuth' // Hook para fazer a importação do useCOntext e useAuth ao mesmo tempo
+import { FormEvent, useState } from 'react';
+import { ref, database, get} from '../services/firebase';
 
 export function Home() {
     // useNavigate é um hook de navegação entre telas
@@ -12,6 +14,7 @@ export function Home() {
     // para a página passada para navigate
     const navigate = useNavigate();
     const { user, singInWithGoogle } = useAuth();
+    const [roomCode, setRoomCode] = useState('');
 
     async function handleCreateRoom() {
         // Se o usuário não estiver autenticado
@@ -20,7 +23,21 @@ export function Home() {
         }
 
         navigate('/rooms/new');
-    }
+    };
+
+    // Função para entrar em uma sala existente
+    async function handleJoinRoom(event: FormEvent) {
+        event.preventDefault();
+
+        // Se o usuário não digitou nada, não ocorre nada
+        if(roomCode.trim() === '') {
+            return;
+        }
+
+        // Busca pelo código da sala nos registros
+        const roomRef = await get(ref(database, `rooms/${roomCode}`));
+
+    };
 
     // <aside> será a área colorida na lateral esquerda
     // <main> será a área principal ao lado direito
@@ -39,10 +56,12 @@ export function Home() {
                         Cria sua sala com o Google
                     </button>
                     <div className='separator'>ou entre em uma sala</div>
-                    <form>
+                    <form onSubmit={handleJoinRoom}>
                         <input 
                             type="text"
                             placeholder="Digite o código da sala"
+                            onChange={event => setRoomCode(event.target.value)}
+                            value={roomCode}
                         />
                         <Button type="submit">
                             Entrar na sala
