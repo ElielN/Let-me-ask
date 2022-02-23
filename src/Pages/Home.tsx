@@ -34,8 +34,17 @@ export function Home() {
             return;
         }
 
-        // Busca pelo código da sala nos registros
+        // Busca pelos dados de uma sala específica (se existir)
         const roomRef = await get(ref(database, `rooms/${roomCode}`));
+
+        // Verifica se a sala existe
+        if(!roomRef.exists()){
+            alert('Room does not exists.');
+            return;
+        }
+
+        // Se a sala existe, redirecionamos para ela
+        navigate(`rooms/${roomCode}`);
 
     };
 
