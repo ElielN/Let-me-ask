@@ -19,6 +19,12 @@
         margin-right: 8px;
     }
 
+    & .outlined {
+        background: #fff;
+        border: 1px solid #835afd;
+        color: #835afd;
+    }
+
     &:not(:disabled):hover { // Quando passar o cursor em cima do botão, ele escurece um pouco
         filter: brightness(0.9);
     }
