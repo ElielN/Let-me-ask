@@ -4,20 +4,35 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'; //Criar rotas e
 import { AuthContextProvider } from './contexts/AuthContext'
 import { Room } from "./Pages/Room";
 import { AdminRoom } from "./Pages/AdminRoom";
+import { ThemeProvider } from 'styled-components';
+import GlobalStyle from './styles/global';
+
+import light from './styles/themes/light';
+import dark from './styles/themes/dark';
+import { useState } from "react";
 
 function App() {
+  const [theme, setTheme] = useState(light);
+
+  const toggleTheme = () => {
+    setTheme(theme.themeTitle === 'light' ? dark : light);
+  };
+
 
   return (
-    <BrowserRouter>
-      <AuthContextProvider>
-        <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="/rooms/new" element={<NewRoom />}/>
-          <Route path="/rooms/:id" element={<Room />}/>
-          <Route path="/admin/rooms/:id" element={<AdminRoom />}/>
-        </Routes>
-      </AuthContextProvider>
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <BrowserRouter>
+        <AuthContextProvider>
+          <Routes>
+            <Route path="/" element={<Home />}/>
+            <Route path="/rooms/new" element={<NewRoom />}/>
+            <Route path="/rooms/:id" element={<Room toggleTheme={toggleTheme}/>}/>
+            <Route path="/admin/rooms/:id" element={<AdminRoom toggleTheme={toggleTheme}/>}/>
+          </Routes>
+        </AuthContextProvider>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

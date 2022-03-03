@@ -1,24 +1,32 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import logoImg from '../assets/images/logo.svg';
 import { Button } from '../components/Button';
 import { Question } from '../components/Question';
 import { RoomCode} from '../components/RoomCode';
 import { useAuth } from '../hooks/useAuth';
 import { useRoom } from '../hooks/useRoom';
 import { ref, database, push, remove } from '../services/firebase';
+import { ThemeContext } from 'styled-components';
+import Switch from 'react-switch';
+import logoImg from '../assets/images/logo.svg';
 import '../styles/room.scss';
 
 type RoomParams = {
     id: string,
 };
 
-export function Room() {
+type Props = {
+    toggleTheme(): void;
+};
+
+export function Room({toggleTheme}: Props) {
     const { user } = useAuth();
     const params = useParams<RoomParams>();
     const roomId = params.id;
     const [newQuestion, setNewQuestion] = useState('');
     const { questions, title } = useRoom(roomId!);
+
+    const { colors, themeTitle } = useContext(ThemeContext);
 
     async function handleSendQuestion(event: FormEvent) {
         event.preventDefault();
@@ -61,7 +69,22 @@ export function Room() {
             <header>
                 <div className='content'>
                     <img src={logoImg} alt='Letmeask'/>
+                    <div>
+                    <Switch 
+                        onChange={toggleTheme}
+                        checked={themeTitle === 'dark'}
+                        checkedIcon={false}
+                        uncheckedIcon={false}
+                        height={10}
+                        width={40}
+                        handleDiameter={20}
+                        onHandleColor='#fff'
+                        offHandleColor='#835afd'
+                        offColor='#555'
+                        onColor='#835afd'
+                    />
                     <RoomCode code={roomId!}/>
+                    </div>
                 </div>
             </header>
             <main>

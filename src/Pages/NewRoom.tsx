@@ -37,7 +37,7 @@ export function NewRoom() {
 
         // O push me retorna uma key (um id único) que iremos usar para identificar cada sala
         // O navigate nos direciona para a sala que acaba de ser criada
-        navigate(`/rooms/${firebaseRoom.key}`);
+        navigate(`/admin/rooms/${firebaseRoom.key}`);
     }
 
     // <aside> será a área colorida na lateral esquerda

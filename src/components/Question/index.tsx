@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import '../styles/question.scss';
+import './styles.scss';
 
 
 // ReactNode é a tipagem para childrens de components (qualquer tsx)

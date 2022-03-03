@@ -8,6 +8,7 @@ import { useAuth } from '../hooks/useAuth' // Hook para fazer a importação do 
 import { FormEvent, useState } from 'react';
 import { ref, database, get} from '../services/firebase';
 
+
 export function Home() {
     // useNavigate é um hook de navegação entre telas
     // usamos ele em conjunto com uma função. Quando chamada, ela irá direcionar
