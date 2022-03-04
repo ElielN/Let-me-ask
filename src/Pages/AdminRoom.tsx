@@ -5,15 +5,18 @@ import { RoomCode} from '../components/RoomCode';
 import { useRoom } from '../hooks/useRoom';
 import { database, ref, remove, update, get, push } from '../services/firebase';
 import { ThemeContext } from 'styled-components';
+import { FormEvent, useContext, useState } from 'react';
+import { useAuth } from '../hooks/useAuth';
 import Switch from 'react-switch';
+
 import deleteImg from '../assets/images/delete.svg';
 import logoImg from '../assets/images/logo.svg';
 import checkImg from '../assets/images/check.svg';
 import answerImg from '../assets/images/answer.svg';
+import moonIcon from '../assets/images/moonIcon.png';
+import sunIcon from '../assets/images/sunIcon.png';
 
 import '../styles/room.scss';
-import { FormEvent, useContext, useState } from 'react';
-import { useAuth } from '../hooks/useAuth';
 
 type RoomParams = {
     id: string,
@@ -111,6 +114,11 @@ export function AdminRoom({toggleTheme}: Props) {
                 <div className='content'>
                     <img src={logoImg} alt='Letmeask'/>
                     <div>
+                        {themeTitle === 'dark' ? 
+                        (<img src={moonIcon} alt='modo dark'/>) 
+                        : 
+                        (<img src={sunIcon} alt='modo light'/>)
+                        }
                         <Switch 
                             onChange={toggleTheme}
                             checked={themeTitle === 'dark'}

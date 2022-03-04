@@ -5,14 +5,14 @@ import { AuthContextProvider } from './contexts/AuthContext'
 import { Room } from "./Pages/Room";
 import { AdminRoom } from "./Pages/AdminRoom";
 import { ThemeProvider } from 'styled-components';
-import GlobalStyle from './styles/global';
+import { usePersistedState } from "./hooks/usePersistedState";
 
+import GlobalStyle from './styles/global';
 import light from './styles/themes/light';
 import dark from './styles/themes/dark';
-import { useState } from "react";
 
 function App() {
-  const [theme, setTheme] = useState(light);
+  const [theme, setTheme] = usePersistedState('theme', light);
 
   const toggleTheme = () => {
     setTheme(theme.themeTitle === 'light' ? dark : light);

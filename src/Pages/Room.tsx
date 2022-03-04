@@ -8,7 +8,11 @@ import { useRoom } from '../hooks/useRoom';
 import { ref, database, push, remove } from '../services/firebase';
 import { ThemeContext } from 'styled-components';
 import Switch from 'react-switch';
+
 import logoImg from '../assets/images/logo.svg';
+import moonIcon from '../assets/images/moonIcon.png';
+import sunIcon from '../assets/images/sunIcon.png';
+
 import '../styles/room.scss';
 
 type RoomParams = {
@@ -70,20 +74,25 @@ export function Room({toggleTheme}: Props) {
                 <div className='content'>
                     <img src={logoImg} alt='Letmeask'/>
                     <div>
-                    <Switch 
-                        onChange={toggleTheme}
-                        checked={themeTitle === 'dark'}
-                        checkedIcon={false}
-                        uncheckedIcon={false}
-                        height={10}
-                        width={40}
-                        handleDiameter={20}
-                        onHandleColor='#fff'
-                        offHandleColor='#835afd'
-                        offColor='#555'
-                        onColor='#835afd'
-                    />
-                    <RoomCode code={roomId!}/>
+                        {themeTitle === 'dark' ? 
+                        (<img src={moonIcon} alt='modo dark'/>) 
+                        : 
+                        (<img src={sunIcon} alt='modo light'/>)
+                        }
+                        <Switch 
+                            onChange={toggleTheme}
+                            checked={themeTitle === 'dark'}
+                            checkedIcon={false}
+                            uncheckedIcon={false}
+                            height={10}
+                            width={40}
+                            handleDiameter={20}
+                            onHandleColor='#fff'
+                            offHandleColor='#835afd'
+                            offColor='#555'
+                            onColor='#835afd'
+                        />
+                        <RoomCode code={roomId!}/>
                     </div>
                 </div>
             </header>

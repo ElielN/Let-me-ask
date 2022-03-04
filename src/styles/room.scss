@@ -120,6 +120,11 @@ export default RoomStyle; */
                 gap: 16px;
                 align-items: center;
 
+                > img {
+                    max-height: 20px;
+                    max-width: 20px;
+                }
+
                 button {
                     height: 40px;
                 }
